@@ -13,7 +13,7 @@ public class StudentDao extends Dao {
         super(em);
     }
 
-    public void persist(String name, String surname, Integer indexNumber){
+    public void create(String name, String surname, Integer indexNumber){
         beginTransaction();
         Student student = new Student(name, surname, indexNumber);
         em.persist(student);

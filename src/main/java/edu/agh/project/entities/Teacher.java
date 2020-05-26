@@ -15,8 +15,8 @@ public class Teacher {
 
     public Teacher() {}
 
-    public Teacher(String name, String surname, String email) {
-        this.personData = new PersonData(name, surname, email);
+    public Teacher(String name, String surname) {
+        this.personData = new PersonData(name, surname);
     }
 
     public int getId() {
@@ -25,5 +25,9 @@ public class Teacher {
 
     public PersonData getPersonData() {
         return personData;
+    }
+
+    public void setPersonData(PersonData personData) {
+        this.personData = personData;
     }
 }
