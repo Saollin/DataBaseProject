@@ -2,6 +2,7 @@ package edu.agh.project.entities;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="students")
@@ -14,6 +15,8 @@ public class Student {
     @Embedded
     private PersonData personData;
     private Integer indexNumber;
+    @ManyToMany(mappedBy = "students", cascade = {CascadeType.PERSIST})
+    private Set<Group> groups;
 
     public Student() { }
 

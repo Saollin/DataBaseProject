@@ -14,14 +14,15 @@ public class Group {
 
     @ManyToOne
     private Course course;
-
     @ManyToOne
     private Teacher teacher;
 
     @Embedded
     private GroupTime groupTime;
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    private Set<Student> students;
 
-    @OneToMany
+    @OneToMany(mappedBy = "examinatedGroup", cascade = {CascadeType.PERSIST})
     @JoinColumn(name="EXAMINATIONS_FK")
     private Set<Examination> examinations;
 
