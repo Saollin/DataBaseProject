@@ -33,4 +33,12 @@ public class Student {
     public Integer getIndexNumber() {
         return indexNumber;
     }
+
+    public void setPersonData(PersonData personData) {
+        this.personData = personData;
+    }
+
+    public void setIndexNumber(Integer indexNumber) {
+        this.indexNumber = indexNumber;
+    }
 }
