@@ -3,8 +3,8 @@ package edu.agh.project.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="students")
-public class Student {
+@Table(name="teachers")
+public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,13 +12,11 @@ public class Student {
 
     @Embedded
     private PersonData personData;
-    private Integer indexNumber;
 
-    public Student() { }
+    public Teacher() {}
 
-    public Student(String name, String surname, String email, Integer indexNumber) {
+    public Teacher(String name, String surname, String email) {
         this.personData = new PersonData(name, surname, email);
-        this.indexNumber = indexNumber;
     }
 
     public int getId() {
@@ -27,9 +25,5 @@ public class Student {
 
     public PersonData getPersonData() {
         return personData;
-    }
-
-    public Integer getIndexNumber() {
-        return indexNumber;
     }
 }
