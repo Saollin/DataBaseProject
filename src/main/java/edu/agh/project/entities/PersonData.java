@@ -6,14 +6,12 @@ import javax.persistence.Embeddable;
 public class PersonData {
     private String name;
     private String surname;
-    private String email;
 
     public PersonData() {}
 
-    public PersonData(String name, String surname, String email) {
+    public PersonData(String name, String surname) {
         this.name = name;
         this.surname = surname;
-        this.email = email;
     }
 
     public String getName() {
@@ -30,13 +28,5 @@ public class PersonData {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

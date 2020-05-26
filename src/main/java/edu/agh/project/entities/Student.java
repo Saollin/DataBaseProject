@@ -17,8 +17,8 @@ public class Student {
 
     public Student() { }
 
-    public Student(String name, String surname, String email, Integer indexNumber) {
-        this.personData = new PersonData(name, surname, email);
+    public Student(String name, String surname, Integer indexNumber) {
+        this.personData = new PersonData(name, surname);
         this.indexNumber = indexNumber;
     }
 
