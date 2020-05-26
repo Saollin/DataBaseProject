@@ -1,6 +1,7 @@
 package edu.agh.project.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="students")

@@ -1,9 +1,10 @@
 package edu.agh.project.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name='courses')
+@Table(name="courses")
 public class Course {
 
     @Id
@@ -11,6 +12,9 @@ public class Course {
     private int id;
 
     private String courseName;
+
+    @ManyToOne
+    private Teacher mainTeacher;
 
     public Course() {}
 
