@@ -21,4 +21,20 @@ public class Course {
     public Course(String courseName) {
         this.courseName = courseName;
     }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public Teacher getMainTeacher() {
+        return mainTeacher;
+    }
+
+    public void setMainTeacher(Teacher mainTeacher) {
+        this.mainTeacher = mainTeacher;
+    }
 }
