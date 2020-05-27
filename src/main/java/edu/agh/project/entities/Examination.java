@@ -2,6 +2,8 @@ package edu.agh.project.entities;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="examinations")
@@ -12,16 +14,60 @@ public class Examination {
     private int id;
 
     @ManyToOne
-    private Group examinatedGroup;
+    @JoinColumn(name="GROUP_FK")
+    private Group group;
+    @OneToMany(mappedBy = "examination", cascade = {CascadeType.PERSIST})
+    private Set<Grade> grades = new HashSet<>();
 
     private Date date;
     private String description;
 
     public Examination() {}
 
-    public Examination(Group examinatedGroup, Date date, String description) {
-        this.examinatedGroup = examinatedGroup;
+    public Examination(Group group, Date date, String description) {
+        this.group = group;
+        this.group.addExamination(this);
         this.date = date;
         this.description = description;
+    }
+
+    public void addGrade(Grade grade) {
+        grades.add(grade);
+    }
+
+    public void addGrade(Student rated, int result) {
+        Grade newGrade = new Grade(rated, this, result);
+        grades.add(newGrade);
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public Set<Grade> getGrades() {
+        return grades;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setGroup(Group changedGroup) {
+        // remove examination from previous group
+        group.removeExamination(this);
+        group = changedGroup;
+        group.addExamination(this);
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
