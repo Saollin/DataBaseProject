@@ -31,7 +31,7 @@ public class Examination {
         this.description = description;
     }
 
-    public void addGrade(Student rated, int result) {
+    public void addGrade(Student rated, double result) {
         if(group.getStudents().contains(rated)) {
             Grade newGrade = new Grade(rated, this, result);
             grades.add(newGrade);
@@ -60,9 +60,11 @@ public class Examination {
 
     public void setGroup(Group changedGroup) {
         // remove examination from previous group
-        group.removeExamination(this);
-        group = changedGroup;
-        group.addExamination(this);
+        if(changedGroup != group){
+            group.removeExamination(this);
+            group = changedGroup;
+            group.addExamination(this);
+        }
     }
 
     public void setDate(Date date) {

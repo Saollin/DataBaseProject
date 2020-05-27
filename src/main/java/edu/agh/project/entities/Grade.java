@@ -14,15 +14,14 @@ public class Grade {
     private Student student;
     @ManyToOne
     private Examination examination;
-    private int result;
+    private double result;
 
     public Grade() {}
 
-    public Grade(Student student, Examination examination, int grade) {
+    public Grade(Student student, Examination examination, double grade) {
         this.student = student;
         this.student.addGrade(this);
         this.examination = examination;
-        this.examination.addGrade(this);
         this.result = grade;
     }
 
@@ -42,7 +41,7 @@ public class Grade {
         this.examination = examination;
     }
 
-    public int getResult() {
+    public double getResult() {
         return result;
     }
 
