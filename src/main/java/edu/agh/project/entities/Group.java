@@ -13,8 +13,11 @@ public class Group {
     private int id;
 
     @ManyToOne
+    @JoinColumn(name="COURSE_FK")
     private Course course;
-    @ManyToOne
+
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name="TEACHER_FK")
     private Teacher teacher;
 
     @Embedded
@@ -29,6 +32,7 @@ public class Group {
 
     public Group(Course course, Teacher teacher, GroupTime groupTime) {
         this.course = course;
+        this.course.addGroupToCourse(this);
         this.teacher = teacher;
         this.groupTime = groupTime;
     }
