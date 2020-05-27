@@ -49,7 +49,11 @@ public class Course {
         return mainTeacher;
     }
 
-    public void setMainTeacher(Teacher mainTeacher) {
-        this.mainTeacher = mainTeacher;
+    public void setMainTeacher(Teacher teacher) {
+        if(mainTeacher != teacher) {
+            mainTeacher.removeFromLedCourses(this);
+            this.mainTeacher = teacher;
+            teacher.addLedCourse(this);
+        }
     }
 }
