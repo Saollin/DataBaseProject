@@ -5,6 +5,7 @@ import edu.agh.project.entities.Student;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import javax.swing.text.html.parser.Entity;
 
 public class StudentDao extends Dao {
@@ -22,6 +23,15 @@ public class StudentDao extends Dao {
 
     public Student find(int id) {
         return em.find(Student.class, id);
+    }
+
+    public Student findWithIndex(int index) {
+        beginTransaction();
+        TypedQuery<Student> query = em.createQuery("from Student as s where s.indexNumber=:indexNum", Student.class);
+        query.setParameter("indexNum", index);
+        Student found = query.getSingleResult();
+        commitTransaction();
+        return found;
     }
 
     public void update(int id, String name, String surname, Integer indexNumber) {
