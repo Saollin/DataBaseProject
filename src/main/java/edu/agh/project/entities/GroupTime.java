@@ -8,9 +8,16 @@ import java.sql.Time;
 @Embeddable
 public class GroupTime {
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private DayOfWeek day;
     private Time hourStart;
     private Time hourEnd;
 
+    public GroupTime() {}
+
+    public GroupTime(DayOfWeek day, Time hourStart, Time hourEnd) {
+        this.day = day;
+        this.hourStart = hourStart;
+        this.hourEnd = hourEnd;
+    }
 }
