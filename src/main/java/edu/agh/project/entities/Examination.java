@@ -31,13 +31,11 @@ public class Examination {
         this.description = description;
     }
 
-    public void addGrade(Grade grade) {
-        grades.add(grade);
-    }
-
     public void addGrade(Student rated, int result) {
-        Grade newGrade = new Grade(rated, this, result);
-        grades.add(newGrade);
+        if(group.getStudents().contains(rated)) {
+            Grade newGrade = new Grade(rated, this, result);
+            grades.add(newGrade);
+        }
     }
 
     public Group getGroup() {
