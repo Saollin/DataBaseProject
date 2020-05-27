@@ -1,6 +1,8 @@
 package edu.agh.project.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,10 +25,10 @@ public class Group {
     @Embedded
     private GroupTime groupTime;
     @ManyToMany(cascade = {CascadeType.PERSIST})
-    private Set<Student> students;
+    private Set<Student> students = new HashSet<>();
 
     @OneToMany(mappedBy = "group", cascade = {CascadeType.PERSIST})
-    private Set<Examination> examinations;
+    private Set<Examination> examinations = new HashSet<>();
 
     public Group() {}
 
@@ -50,17 +52,31 @@ public class Group {
         student.addToGroup(this);
     }
 
+    public void addStudents(Collection<Student> students) {
+        for(Student s : students) {
+            addStudent(s);
+        }
+    }
+
     public void removeStudent(Student student) {
         student.removeFromGroup(this);
         students.remove(student);
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Course changedCourse) {
+        if(changedCourse != course) {
+            course.removeGroupFromCourse(this);
+            this.course = changedCourse;
+            changedCourse.addGroupToCourse(this);
+        }
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeacher(Teacher changedTeacher) {
+        if(changedTeacher != teacher){
+            teacher.removeFromTeachedGroups(this);
+            this.teacher = changedTeacher;
+            changedTeacher.addTeachedGroups(this);
+        }
     }
 
     public void setGroupTime(GroupTime groupTime) {
