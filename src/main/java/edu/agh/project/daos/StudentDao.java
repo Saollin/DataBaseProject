@@ -14,9 +14,14 @@ public class StudentDao extends Dao {
         super(em);
     }
 
-    public void create(String name, String surname, Integer indexNumber){
-        beginTransaction();
+    public Student create(String name, String surname, Integer indexNumber){
         Student student = new Student(name, surname, indexNumber);
+        create(student);
+        return student;
+    }
+
+    public void create(Student student) {
+        beginTransaction();
         em.persist(student);
         commitTransaction();
     }

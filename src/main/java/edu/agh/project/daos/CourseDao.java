@@ -12,12 +12,18 @@ public class CourseDao extends Dao {
         super(em);
     }
 
-    public void create(String courseName, Teacher mainTeacher){
-        beginTransaction();
+    public Course create(String courseName, Teacher mainTeacher){
         Course course = new Course(courseName, mainTeacher);
+        create(course);
+        return course;
+    }
+
+    public void create(Course course) {
+        beginTransaction();
         em.persist(course);
         commitTransaction();
     }
+
 
     public Course find(int id) {
         return em.find(Course.class, id);
