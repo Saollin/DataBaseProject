@@ -55,7 +55,9 @@ public class ExaminationDao extends Dao {
     public void delete(int id) {
         beginTransaction();
         Examination examination = find(id);
-        em.remove(examination);
+        if(examination != null) {
+            em.remove(examination);
+        }
         commitTransaction();
     }
 }

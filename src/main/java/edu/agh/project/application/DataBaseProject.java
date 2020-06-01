@@ -226,11 +226,12 @@ public class DataBaseProject {
         int id = Integer.parseInt(userInputReader.readLine());
 
         Group g = groupDao.find(id);
-
-        for (Student s:g.getStudents()) {
-            System.out.println(s.getPersonData().getName() + " " + s.getPersonData().getSurname() + ", Indeks: " + s.getIndexNumber());
+        if(g != null) {
+            for (Student s : g.getStudents()) {
+                System.out.println(s.getPersonData().getName() + " " + s.getPersonData().getSurname() + ", Indeks: " + s.getIndexNumber());
+            }
+            userInputReader.readLine();
         }
-        userInputReader.readLine();
     }
 
     private void studentRun(Student student) throws IOException {
