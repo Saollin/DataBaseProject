@@ -16,7 +16,7 @@ public class Examination {
     @ManyToOne
     @JoinColumn(name="GROUP_FK")
     private Group group;
-    @OneToMany(mappedBy = "examination", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "examination", cascade = {CascadeType.PERSIST}, orphanRemoval = true)
     private Set<Grade> grades = new HashSet<>();
 
     private Date date;
