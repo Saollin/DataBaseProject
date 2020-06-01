@@ -36,6 +36,7 @@ public class Group {
         this.course = course;
         this.course.addGroupToCourse(this);
         this.teacher = teacher;
+        teacher.addTeachedGroups(this);
         this.groupTime = groupTime;
     }
 
