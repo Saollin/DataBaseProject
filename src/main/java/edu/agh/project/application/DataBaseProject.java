@@ -212,13 +212,23 @@ public class DataBaseProject {
         System.out.println("Enter Id of exam: ");
         int examId = Integer.parseInt(userInputReader.readLine());
         Examination exam = examinationDao.find(examId);
+        if(exam == null){
+            System.out.println("Nie ma takiego egzaminu");
+            return;
+        }
         System.out.println("Enter Index number of Student: ");
         int index = Integer.parseInt(userInputReader.readLine());
-        Student student = studentDao.findWithIndex(index);
-        System.out.println("Enter result: ");
-        double result = Double.parseDouble(userInputReader.readLine());
+        try {
+            Student student = studentDao.findWithIndex(index);
+            System.out.println("Enter result: ");
+            double result = Double.parseDouble(userInputReader.readLine());
 
-        examinationDao.addGrade(exam,student,result);
+            examinationDao.addGrade(exam,student,result);
+        }
+        catch (NoResultException exception){
+            System.out.println("Nie ma takiego studenta");
+            userInputReader.readLine();
+        }
     }
 
     private void listOfStudentsFromGroup(Teacher teacher) throws IOException {
