@@ -5,6 +5,7 @@ import edu.agh.project.entities.Student;
 import edu.agh.project.entities.Teacher;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 public class TeacherDao extends Dao {
 
@@ -21,6 +22,15 @@ public class TeacherDao extends Dao {
 
     public Teacher find(int id) {
         return em.find(Teacher.class, id);
+    }
+
+    public Teacher findWithSurname(String surname) {
+        beginTransaction();
+        TypedQuery<Teacher> query = em.createQuery("from Teacher as t where t.personData.surname=:surname",Teacher.class);
+        query.setParameter("surname", surname);
+        Teacher found = query.getSingleResult();
+        commitTransaction();
+        return found;
     }
 
     public void update(int id, String name, String surname, Integer indexNumber) {
