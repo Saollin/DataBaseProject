@@ -245,7 +245,8 @@ public class DataBaseProject {
 
     private void listOfCoursesStudent(Student student) throws IOException {
         for (Group g:student.getGroups()) {
-            System.out.println(g.getCourse().getCourseName() + ", " + g.getTeacher().getPersonData().getName() + " " +
+            System.out.println(g.getCourse().getCourseName() + ", " + g.getGroupTime()
+                    + ", " + g.getTeacher().getPersonData().getName() + " " +
                     g.getTeacher().getPersonData().getSurname());
         }
         userInputReader.readLine();
