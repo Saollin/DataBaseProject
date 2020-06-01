@@ -33,6 +33,7 @@ public class DataBaseProject {
         Student student3 = studentDao.create("Grzegorz", "Kowalski", 296333);
         Student student4 = studentDao.create("Andrzej", "Ruba", 296685);
         Student student5 = studentDao.create("Alicja", "Zielińska", 296499);
+        //siema, mała zmiana
 
         // create new course (teacher can be create without dao, because he is saved with creating course if doesn't exist)
         Teacher teacher1 = new Teacher("Robert", "Marcjan");
