@@ -87,26 +87,42 @@ public class DataBaseProject {
 
         switch (option) {
             case 1:
-                loginTeacher();
+                loginTeacher(3);
                 break;
             case 2:
-                loginStudent();
+                loginStudent(3);
                 break;
         }
     }
 
-    private void loginStudent() throws IOException {
+    private void loginStudent(int count) throws IOException {
         System.out.println("Login: ");
         int index = Integer.parseInt(userInputReader.readLine());
-        Student student = studentDao.findWithIndex(index);
-        studentRun(student);
+        try {
+            Student student = studentDao.findWithIndex(index);
+            studentRun(student);
+        }
+        catch (NoResultException exception){
+            if(count > 0) {
+                System.out.println("Nie ma takiego użytkownika. Zostało prób: " + count);
+                loginStudent(count-1);
+            }
+        }
     }
 
-    private void loginTeacher() throws IOException {
+    private void loginTeacher(int count) throws IOException {
         System.out.println("Login: ");
         String surname = userInputReader.readLine().trim();
-        Teacher teacher = teacherDao.findWithSurname(surname);
-        teacherRun(teacher);
+        try {
+            Teacher teacher = teacherDao.findWithSurname(surname);
+            teacherRun(teacher);
+        }
+        catch (NoResultException exception){
+            if(count > 0){
+                System.out.println("Nie ma takiego użytkownika. Zostało prób: " + count);
+                loginTeacher(count-1);
+            }
+        }
     }
 
     private void teacherRun(Teacher teacher) throws IOException {
@@ -184,15 +200,12 @@ public class DataBaseProject {
         String desc = userInputReader.readLine().trim();
 
         examinationDao.create(g,Date.valueOf(date),desc);
-        userInputReader.readLine();
     }
 
     private void deleteExamination(Teacher teacher) throws IOException {
         System.out.println("Enter examination Id: ");
         int examId = Integer.parseInt(userInputReader.readLine());
-
         examinationDao.delete(examId);
-        userInputReader.readLine();
     }
 
     private void addGrade(Teacher teacher) throws IOException {
@@ -206,7 +219,6 @@ public class DataBaseProject {
         double result = Double.parseDouble(userInputReader.readLine());
 
         examinationDao.addGrade(exam,student,result);
-        userInputReader.readLine();
     }
 
     private void listOfStudentsFromGroup(Teacher teacher) throws IOException {

@@ -5,6 +5,7 @@ import edu.agh.project.entities.Student;
 import edu.agh.project.entities.Teacher;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class TeacherDao extends Dao {
@@ -24,7 +25,7 @@ public class TeacherDao extends Dao {
         return em.find(Teacher.class, id);
     }
 
-    public Teacher findWithSurname(String surname) {
+    public Teacher findWithSurname(String surname) throws NoResultException {
         beginTransaction();
         TypedQuery<Teacher> query = em.createQuery("from Teacher as t where t.personData.surname=:surname",Teacher.class);
         query.setParameter("surname", surname);
