@@ -20,4 +20,9 @@ public class GroupTime {
         this.hourStart = hourStart;
         this.hourEnd = hourEnd;
     }
+
+    @Override
+    public String toString() {
+        return day.getName() + ": " + hourStart + "-" + hourEnd;
+    }
 }
