@@ -54,4 +54,12 @@ public class Teacher {
     public void setPersonData(PersonData personData) {
         this.personData = personData;
     }
+
+    public Set<Course> getLedCourses(){
+        return ledCourses;
+    }
+
+    public Set<Group> getTeachedGroups(){
+        return teachedGroups;
+    }
 }

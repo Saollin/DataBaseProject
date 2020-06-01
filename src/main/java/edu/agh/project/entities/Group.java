@@ -39,6 +39,10 @@ public class Group {
         this.groupTime = groupTime;
     }
 
+    public int getId(){
+        return id;
+    }
+
     public void addExamination(Examination examination) {
         examinations.add(examination);
     }

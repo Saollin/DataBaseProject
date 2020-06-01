@@ -31,6 +31,10 @@ public class Examination {
         this.description = description;
     }
 
+    public int getId(){
+        return id;
+    }
+
     public void addGrade(Student rated, double result) {
         if(group.getStudents().contains(rated)) {
             Grade newGrade = new Grade(rated, this, result);
