@@ -29,45 +29,57 @@ public class DataBaseProject {
         GroupDao groupDao = new GroupDao(em);
         ExaminationDao examinationDao = new ExaminationDao(em);
         TeacherDao teacherDao = new TeacherDao(em);
-        BufferedReader userInputReader =
-                new BufferedReader(new InputStreamReader(System.in));
-        new DataBaseProject(studentDao,courseDao,groupDao,examinationDao, teacherDao, userInputReader).run();
-        /*
-        // create entity manager
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory( "myConfig");
-        EntityManager em = emf.createEntityManager();
 
-        // create daos
-        StudentDao studentDao = new StudentDao(em);
-        CourseDao courseDao = new CourseDao(em);
-        GroupDao groupDao = new GroupDao(em);
-        ExaminationDao examinationDao = new ExaminationDao(em);
-
-        // create students
+        // create students group1
         Student student1 = studentDao.create("Grzegorz", "Janosz", 296573);
         Student student2 = studentDao.create("Adam", "Bera", 296546);
         Student student3 = studentDao.create("Grzegorz", "Kowalski", 296333);
         Student student4 = studentDao.create("Andrzej", "Ruba", 296685);
         Student student5 = studentDao.create("Alicja", "Zielińska", 296499);
+
+        // group2 students
+        Student student6 = studentDao.create("Aleksandra", "Jarosz", 296572);
+        Student student7 = studentDao.create("Sławomir", "Kubeczko", 296446);
+        Student student8 = studentDao.create("Irena", "Steczkowska", 297343);
+        Student student9 = studentDao.create("Mariusz", "Smiry", 300185);
+        Student student10 = studentDao.create("Anna", "Wolna", 300122);
         //siema, mała zmiana
 
         // create new course (teacher can be create without dao, because he is saved with creating course if doesn't exist)
         Teacher teacher1 = new Teacher("Robert", "Marcjan");
+        Teacher teacher2 = new Teacher("Leszek", "Siwik");
+        Teacher teacher3 = new Teacher("Jarosłow", "Koźlak");
+
         Course course = courseDao.create("Bazy danych", teacher1);
+        Course course2 = courseDao.create("Systemy operacyjne", teacher3);
 
         // create new group
         GroupTime groupTime = new GroupTime(DayOfWeek.TUESDAY, Time.valueOf("12:50:00"), Time.valueOf("14:20:00"));
         Group group = groupDao.create(course, teacher1, groupTime);
         groupDao.addStudentsToGroup(group, Arrays.asList(student1, student2, student3, student4, student5));
 
+        GroupTime groupTime2 = new GroupTime(DayOfWeek.THURSDAY, Time.valueOf("14:40:00"), Time.valueOf("16:10:00"));
+        Group group2 = groupDao.create(course, teacher2, groupTime2);
+        groupDao.addStudentsToGroup(group2, Arrays.asList(student6, student7, student8, student9, student10));
+
+        GroupTime groupTime3 = new GroupTime(DayOfWeek.TUESDAY, Time.valueOf("14:40:00"), Time.valueOf("16:10:00"));
+        Group group3 = groupDao.create(course2, teacher3, groupTime3);
+        groupDao.addStudentsToGroup(group3, Arrays.asList(student1, student2, student5, student9, student10));
+
         // create examination
-        Examination examination = examinationDao.create(group, Date.valueOf("2020-04-20"), "Kolos z MongoDB");
+        Examination examination = examinationDao.create(group, Date.valueOf("2020-04-20"), "Kolokwium z MongoDB");
         examinationDao.addGradesOfExamination(examination, Arrays.asList(student1, student2), 5);
         examinationDao.addGradesOfExamination(examination, Arrays.asList(student3, student4), 4.5);
         examinationDao.addGrade(examination, student5, 3);
 
-        // we have to close EntityManager at the end of program
-        em.close();*/
+        Examination examination2 = examinationDao.create(group, Date.valueOf("2020-03-16"), "Kolokwium z Hibernate");
+        examinationDao.addGradesOfExamination(examination2, Arrays.asList(student1, student2), 4.5);
+        examinationDao.addGradesOfExamination(examination2, Arrays.asList(student3, student4), 4.0);
+        examinationDao.addGrade(examination2, student5, 3.5);
+
+        BufferedReader userInputReader =
+                new BufferedReader(new InputStreamReader(System.in));
+        new DataBaseProject(studentDao,courseDao,groupDao,examinationDao, teacherDao, userInputReader).run();
     }
 
     public DataBaseProject(StudentDao studentDao, CourseDao courseDao, GroupDao groupDao, ExaminationDao examinationDao, TeacherDao teacherDao, BufferedReader userInputReader) {
